@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\authController;
+use App\Http\Controllers\productController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,17 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/',function(){
+    return response()->json([
+        'status'=>false,
+        'message'=>'Access denied, must login first'
+    ],401);
+})->name('login');
+
+//Route User
+Route::post('register',[authController::class, 'registerUser']);
+Route::post('login',[authController::class, 'loginUser']);
+
+//Route Product
+Route::get('product',[productController::class, 'index'])->middleware('auth:sanctum');

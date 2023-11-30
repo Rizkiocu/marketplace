@@ -20,10 +20,10 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // untuk menambah data uji coba secara otomatis ke database
+        // untuk menambah data example secara otomatis ke database
         $faker =\Faker\Factory::create();
         for ($i=0; $i < 10; $i++) { 
-         product::created([
+         product::create([
             'name' => $faker->word,
             'price' => $faker->randomNumber(3, true),
             'description' => $faker->sentence(5, true)
