@@ -6,11 +6,11 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckPembeli
+class CheckSeller
 {
     public function handle($request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->role === 'pembeli') {
+        if (auth()->check() && auth()->user()->role === 'seller') {
             return $next($request);
         }
 

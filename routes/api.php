@@ -32,7 +32,7 @@ Route::post('register',[authController::class, 'registerUser']);
 Route::post('login',[authController::class, 'loginUser']);
 Route::post('logout',[authController::class, 'logoutUser'])->middleware('auth:sanctum');
 
-Route::group(['middleware' => ['auth:sanctum', 'penjual']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'seller']], function () {
     // Route khusus untuk penjual tidak bisa diakses oleh pembeli
     Route::post('product', [productController::class, 'store']);
     Route::put('product/{product}', [productController::class, 'update']);

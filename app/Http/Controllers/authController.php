@@ -69,7 +69,7 @@ class authController extends Controller
         $datauser = User::where('email', $request->email)->first();
 
         // Periksa peran pengguna
-        if ($datauser->role != 'penjual' && $datauser->role != 'pembeli') {
+        if ($datauser->role != 'seller' && $datauser->role != 'buyer') {
         return response()->json([
             'status' => false,
             'message' => 'Invalid user role'
