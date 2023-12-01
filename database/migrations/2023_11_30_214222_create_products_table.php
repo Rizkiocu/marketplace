@@ -20,15 +20,15 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // untuk menambah data example secara otomatis ke database
-        $faker =\Faker\Factory::create();
-        for ($i=0; $i < 10; $i++) { 
-         product::create([
-            'name' => $faker->word,
-            'price' => $faker->randomNumber(3, true),
-            'description' => $faker->sentence(5, true)
-         ]);
-        }
+        // // untuk menambah data example secara otomatis ke database
+        // $faker =\Faker\Factory::create();
+        // for ($i=0; $i < 10; $i++) { 
+        //  product::create([
+        //     'name' => $faker->word,
+        //     'price' => $faker->randomNumber(3, true),
+        //     'description' => $faker->sentence(5, true)
+        //  ]);
+        // }
     }
 
     /**

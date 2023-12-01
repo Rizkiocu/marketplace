@@ -15,7 +15,7 @@ class CheckPenjual
         }
 
         return response()->json([
-            'message' => 'Unauthorized'
+            'message' => 'Unauthorized | no access'
         ], 401);
     }
 }

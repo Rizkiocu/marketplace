@@ -16,20 +16,20 @@ class authController extends Controller
         $rules = [
             'name'=>'required',
             'email'=>'required|email|unique:users,email',
-            'password'=>'required',
+            'password'=>'required|string|min:8',
         ];
 
-        //untuk validasi gagal
+        //jika validasi gagal
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()) {
             return response()->json([
                 'status'=>false,
                 'message'=>'Validation process failed',
                 'data'=> $validator->errors()
-            ], 401);
+            ], 400);
         }
 
-        //untuk validasi berhasil
+        //jika validasi berhasil
         $datauser->name = $request->name;
         $datauser->email = $request->email;
         $datauser->password = Hash::make($request->password);
@@ -39,7 +39,7 @@ class authController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'successfully Register',
-        ],200);
+        ],201);
     }
 
     public function loginUser(Request $request){
