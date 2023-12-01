@@ -62,6 +62,14 @@ class productController extends Controller
      */
     public function show(Product $product)
     {
+        if (!$product) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Product not found',
+                'data' => null
+            ], 404);
+        }
+    
         return response()->json([
             'status' => true,
             'message' => 'Product details',
@@ -106,6 +114,14 @@ class productController extends Controller
      */
     public function delete(Product $product)
     {
+        // Cek apakah produk ditemukan
+        if (!$product) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Product not found'
+            ], 404);
+        }
+
         // Hapus produk
         $product->delete();
 
