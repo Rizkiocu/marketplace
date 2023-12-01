@@ -33,11 +33,12 @@ class authController extends Controller
         $datauser->name = $request->name;
         $datauser->email = $request->email;
         $datauser->password = Hash::make($request->password);
+        $datauser->role = $request->role ?? 'pembeli'; // Default role 'pembeli'
         $datauser->save();
 
         return response()->json([
             'status' => true,
-            'message' => 'successfully created data',
+            'message' => 'successfully Register',
         ],200);
     }
 
@@ -66,12 +67,28 @@ class authController extends Controller
         }
 
         $datauser = User::where('email', $request->email)->first();
+
+        // Periksa peran pengguna
+        if ($datauser->role != 'penjual' && $datauser->role != 'pembeli') {
+        return response()->json([
+            'status' => false,
+            'message' => 'Invalid user role'
+        ], 401);
+        }
+
         return response()->json([
             'status'=>true,
-            'message'=>'login successful',
+            'message'=>'Login Successful',
             'token'=>$datauser->createToken('api-product')->plainTextToken
         ]);
 
         
+    }
+
+    public function logoutUser(Request $request) {
+        $request->User()->currentAccessToken()->delete();
+        return response()->json([
+            'message'=>'Successfully Logout'
+        ],200);
     }
 }

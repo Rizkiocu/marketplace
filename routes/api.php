@@ -30,6 +30,11 @@ Route::get('/',function(){
 //Route User
 Route::post('register',[authController::class, 'registerUser']);
 Route::post('login',[authController::class, 'loginUser']);
+Route::post('logout',[authController::class, 'logoutUser'])->middleware('auth:sanctum');
 
-//Route Product
-Route::get('product',[productController::class, 'index'])->middleware('auth:sanctum');
+
+Route::group(['middleware' => ['auth:sanctum', 'pembeli']], function () {
+    // Route untuk pembeli
+    Route::get('product',[productController::class, 'index']);
+    Route::get('/products/{product}', [ProductController::class, 'show']);
+});
