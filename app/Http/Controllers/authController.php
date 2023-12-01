@@ -33,7 +33,7 @@ class authController extends Controller
         $datauser->name = $request->name;
         $datauser->email = $request->email;
         $datauser->password = Hash::make($request->password);
-        $datauser->role = $request->role ?? 'pembeli'; // Default role 'pembeli'
+        $datauser->role = $request->role ?? 'buyer'; // Default role 'pembeli'
         $datauser->save();
 
         return response()->json([
